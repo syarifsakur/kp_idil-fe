@@ -77,7 +77,8 @@ const BarangForm: React.FC<BarangFormProps> = ({ initialValues, onSubmit, mode }
         <Form.Item label="Kondisi" name="kondisi" rules={[{ required: true }]}>
           <Select placeholder="Pilih kondisi">
             <Select.Option value="baik">Baik</Select.Option>
-            <Select.Option value="rusak">Rusak</Select.Option>
+            <Select.Option value="rusak ringan">Rusak Ringan</Select.Option>
+                        <Select.Option value="rusak berat">Rusak Berat</Select.Option>
           </Select>
         </Form.Item>
 

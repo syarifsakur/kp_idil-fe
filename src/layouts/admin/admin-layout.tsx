@@ -15,7 +15,7 @@ import {
   showNotificationError,
 } from "../../utils";
 import { logout } from "../../utils/apis";
-import logo from "../../assets/logo_bnpb.jpeg";
+import logo from "../../assets/logo.jpg";
 
 const { Header, Sider, Content } = Layout;
 

@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
           listRiwayat.filter((i: any) => i.status === "dikembalikan").length
         );
         setBarangHilang(
-          listRiwayat.filter((i: any) => i.status === "hilang").length
+          listRiwayat .filter((i: any) => i.status === "hilang").length
         );
       } catch (error) {
         console.error("Gagal memuat data dashboard:", error);

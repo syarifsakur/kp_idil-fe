@@ -37,7 +37,7 @@ API_JWT.interceptors.request.use(
           const err = error as AxiosError;
           if (err?.response?.status == 401) {
             removeItem("profile");
-            window.location.href = "/auth/login";
+            window.location.href = "/";
           } else {
             console.log(err);
           }
@@ -64,15 +64,10 @@ export const createBarang = (data: FormData) =>
   API_JWT.post("/barang/create", data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
-export const updateBarang = async (id: string, formData: FormData) => {
-  const res = await fetch(`http://localhost:2021/barang/update/${id}`, {
-    method: "PUT",
-    body: formData,
+export const updateBarang = (id: string, formData: FormData) =>
+  API_JWT.put(`/barang/update/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
   });
-
-  if (!res.ok) throw new Error("Gagal update barang");
-  return await res.json();
-};
 export const getBarangById = (id: string) => API_JWT.get(`/barang/${id}`);
 export const deleteBarang = async (id: string) => {
   return await API_JWT.delete(`/barang/delete/${id}`);

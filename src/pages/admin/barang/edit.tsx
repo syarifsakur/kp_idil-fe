@@ -47,6 +47,7 @@ const BarangEdit: React.FC = () => {
       message.success("Barang berhasil diperbarui");
       navigate("/admin/barang");
     } catch (err: any) {
+      console.error("Update error:", err); // debug log
       message.error(err.message || "Terjadi kesalahan server");
     }
   };
@@ -66,10 +67,10 @@ const BarangEdit: React.FC = () => {
       <div className="min-h-screen flex justify-center items-start py-10 bg-gray-50">
         <div className="w-full max-w-2xl">
           {barang ? (
-            <BarangForm 
-              initialValues={barang} 
-              onSubmit={handleUpdate} 
-              mode="edit" 
+            <BarangForm
+              initialValues={barang}
+              onSubmit={handleUpdate}
+              mode="edit"
             />
           ) : (
             <message.error>Data barang tidak ditemukan</message.error>
