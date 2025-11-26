@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, message, Card } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import bg from "../../../assets/kantor.jpg";
+import logo from "../../../assets/logo-removebg-preview.png"; // 🔹 Tambahkan logo di sini
 import { login } from "../../../utils/apis";
 import { setItem } from "../../../utils/storages";
 import { jwtDecode } from "jwt-decode";
@@ -17,10 +18,8 @@ const Login: React.FC = () => {
 
       if (!data?.token) throw new Error("Token tidak ditemukan dari server.");
 
-      // 🔹 Decode token untuk ambil expiry
       const decoded = jwtDecode(data.token) as any;
 
-      // 🔹 Simpan ke localStorage dengan struktur konsisten
       setItem({
         key: "profile",
         value: {
@@ -32,7 +31,6 @@ const Login: React.FC = () => {
 
       message.success("Login berhasil");
 
-      // 🔹 Redirect ke admin
       setTimeout(() => {
         window.location.href = "/admin";
       }, 500);
@@ -61,7 +59,6 @@ const Login: React.FC = () => {
         justifyContent: "center",
       }}
     >
-      {/* Overlay gelap */}
       <div
         style={{
           position: "absolute",
@@ -70,87 +67,107 @@ const Login: React.FC = () => {
         }}
       />
 
-      {/* Card login */}
-      <Card
-        title={
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: 24,
-              fontWeight: 700,
-              color: "#fff",
-            }}
-          >
-            Logistik Dan Peralatan
-          </div>
-        }
-        style={{
-          width: 420,
-          borderRadius: 18,
-          overflow: "hidden",
-          boxShadow: "0 15px 40px rgba(0,0,0,0.35)",
-          background: "linear-gradient(135deg, #ff7e21 0%, #ff9f1c 100%)",
-          border: "none",
-          zIndex: 1,
-        }}
-        bodyStyle={{
-          padding: 32,
-          background: "rgba(255,255,255,0.92)",
-          backdropFilter: "blur(4px)",
-        }}
+<Card
+  style={{
+    width: 420,
+    borderRadius: 18,
+    overflow: "hidden",
+    boxShadow: "0 15px 40px rgba(0,0,0,0.35)",
+    border: "none",
+    zIndex: 1,
+    padding: 0,
+  }}
+  bodyStyle={{ padding: 0 }}
+>
+
+  {/* 🔶 BAGIAN ORANGE — FULL SAMPAI SEBELUM USERNAME */}
+  <div
+    style={{
+      background: "linear-gradient(135deg, #ff7e21 0%, #ff9f1c 100%)",
+      padding: "40px 24px", // cukup untuk header saja
+      textAlign: "center",
+      color: "#fff",
+    }}
+  >
+    {/* Logo + Judul */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 12,
+        fontSize: 24,
+        fontWeight: 700,
+      }}
+    >
+      <img
+        src={logo}
+        alt="logo"
+        style={{ width: 55, height: 55, objectFit: "contain" }}
+      />
+      Logistik Dan Peralatan
+    </div>
+  </div>
+
+  {/* 🔲 FORM SECTION — PUTIH MULAI DARI USERNAME */}
+  <div
+    style={{
+      padding: "32px",
+      background: "rgba(255,255,255,0.92)",
+      backdropFilter: "blur(4px)",
+    }}
+  >
+    <Form name="login" layout="vertical" onFinish={onFinish} autoComplete="off">
+
+      <Form.Item
+        name="username"
+        label={<span style={{ fontWeight: 600 }}>Username</span>}
+        rules={[{ required: true, message: "Masukkan username!" }]}
       >
-        <Form
-          name="login"
-          layout="vertical"
-          onFinish={onFinish}
-          autoComplete="off"
+        <Input
+          prefix={<UserOutlined />}
+          placeholder="Masukkan username"
+          size="large"
+          style={{ borderRadius: 6 }}
+        />
+      </Form.Item>
+
+      <Form.Item
+        name="password"
+        label={<span style={{ fontWeight: 600 }}>Password</span>}
+        rules={[{ required: true, message: "Masukkan password!" }]}
+      >
+        <Input.Password
+          prefix={<LockOutlined />}
+          placeholder="Masukkan password"
+          size="large"
+          style={{ borderRadius: 6 }}
+        />
+      </Form.Item>
+
+      <Form.Item style={{ marginTop: 24 }}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          block
+          size="large"
+          loading={loading}
+          style={{
+            borderRadius: 8,
+            fontWeight: 700,
+            fontSize: 16,
+            backgroundColor: "#ff7e21",
+            borderColor: "#ff7e21",
+          }}
         >
-          <Form.Item
-            name="username"
-            label="Username"
-            rules={[{ required: true, message: "Masukkan username!" }]}
-          >
-            <Input
-              prefix={<UserOutlined />}
-              placeholder="Masukkan username"
-              size="large"
-              style={{ borderRadius: 6 }}
-            />
-          </Form.Item>
+          LOGIN
+        </Button>
+      </Form.Item>
 
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[{ required: true, message: "Masukkan password!" }]}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder="Masukkan password"
-              size="large"
-              style={{ borderRadius: 6 }}
-            />
-          </Form.Item>
+    </Form>
+  </div>
+</Card>
 
-          <Form.Item style={{ marginTop: 24 }}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              block
-              size="large"
-              loading={loading}
-              style={{
-                borderRadius: 8,
-                fontWeight: 700,
-                fontSize: 16,
-                backgroundColor: "#ff7e21",
-                borderColor: "#ff7e21",
-              }}
-            >
-              LOGIN
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
     </div>
   );
 };
