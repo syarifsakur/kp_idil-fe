@@ -17,7 +17,7 @@ import {
 } from "../../utils";
 import { logout } from "../../utils/apis";
 import logo from "../../assets/adminlogo.png";
-import kantor from "../../assets/ruangan.jpg";
+import kantor from "../../assets/bg-logo.jpg";
 
 const { Header, Sider, Content } = Layout;
 
@@ -110,7 +110,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         style={{
           height: "100vh",
           overflow: "auto",
-          backgroundColor: "#ff8c00", // ORANGE
+          backgroundColor: "", // ORANGE
         }}
       >
         {/* LOGO */}
@@ -121,7 +121,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             alignItems: "center",
             justifyContent: collapsed ? "center" : "flex-start",
             padding: collapsed ? 0 : "0 16px",
-            background: "#ff8c00",
+            background: "",
             borderBottom: "1px solid rgba(255,255,255,0.2)",
           }}
         >
@@ -143,7 +143,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           mode="inline"
           selectedKeys={[selectedKey]}
           style={{
-            backgroundColor: "#ff8c00",
+            backgroundColor: "#0a1a2f",
             color: "#fff",
             borderRight: "none",
           }}
@@ -234,7 +234,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             padding: 24,
             backgroundImage: `url(${kantor})`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "center 10px",
             borderRadius: borderRadiusLG,
             position: "relative",
           }}
